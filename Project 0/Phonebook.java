@@ -222,7 +222,27 @@ public class Phonebook
     public String printContactsFromCountryCodes(int... countryCodes)
     {
         // Complete this method.
-        return "";
+
+        StringBuilder result = new StringBuilder();
+        result.append("Contacts from country codes: ");
+        for (int code : countryCodes) {
+            result.append(code).append(", ");
+        }
+        result.delete(result.length() - 2, result.length()); // Remove the trailing comma and space
+        result.append("\n");
+
+        // Iterate through contacts and filter based on country codes
+        for (Person contact : contacts) {
+            if (contact != null) {
+                for (int countryCode : countryCodes) {
+                    if (contact.getCountryCode() == countryCode) {
+                        result.append(contact.toString()).append("\n");
+                        break;
+                }
+            }
+        }
+    }
+    return result.toString();
     }
 
     /**
