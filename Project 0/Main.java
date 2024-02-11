@@ -12,7 +12,7 @@ public class Main
                     "Area Code", "Phone Number", "None - Go back to Main Menu" },
             {
                     // Menu for View Phonebook
-                    "View All", "View Contact through ID", "View Contacts through Country Code",
+                    "View All", "Search by country", "Search by surname",
                     "Go back to Main Menu" }, };
     private static final Scanner input = new Scanner(System.in);
 
