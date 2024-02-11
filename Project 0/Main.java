@@ -43,6 +43,7 @@ public class Main
                 case 2:
                     String contactID = prompt("\nEnter contact Id: ");
                     Person contact = pb.getContact(contactID);
+                    pb.deleteContact(contactID);
 
                     while(true) {
                         if (contact != null) {
@@ -55,46 +56,33 @@ public class Main
                             case 1:
                                 String newID = prompt("Enter new ID: ");
                                 contact.setId(newID);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 2:
                                 String newSurname = prompt("Enter new surname: ");
                                 contact.setLName(newSurname);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 3:
-                                String newGender = prompt("Enter new gender: ");
+                                String newGender = prompt("Enter new gender (M for male, F for female): ");
                                 contact.setSex(newGender);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 4:
                                 String newOccupation = prompt("Enter new occupation: ");
                                 contact.setOccupation(newOccupation);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 5:
                                 int newCountryCode = Integer.parseInt(prompt("Enter new country code: "));
                                 contact.setCountryCode(newCountryCode);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 6:
                                 int newAreaCode = Integer.parseInt(prompt("Enter new area code: "));
                                 contact.setAreaCode(newAreaCode);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 7:
                                 String newPhoneNumber = prompt("Enter new phone number: ");
                                 contact.setContactNum(newPhoneNumber);
-                                pb.deleteContact(contactID);
-                                pb.insert(contact);
                                 continue;
                             case 8:
+                                pb.insert(contact);
                                 break;
                             default:
                                 System.out.println("Invalid option!");
