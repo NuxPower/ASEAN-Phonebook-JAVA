@@ -19,7 +19,7 @@ public class Phonebook
     public int getSize()
     {
         // Complete this method
-        return 0;
+        return size;
     }
 
     /**
@@ -31,7 +31,14 @@ public class Phonebook
     public Person getContactAtIndex(int index)
     {
         // Complete this method
-        return null;
+
+        // checks if index is valid and returns contacts
+        if (index >= 0 && index < size) {
+            return contacts[index];
+        } else {
+            // Invalid or out of range
+            return null;
+        }
     }
 
     /**
@@ -43,6 +50,14 @@ public class Phonebook
     public Person getContact(String id)
     {
         // Complete this method
+
+        // loops through contacts and returns the contact with the same id from given parameter
+        for (int i = 0; i < size; i++) {
+            if (contacts[i].getId().equals(id)) {
+                return contacts[i];
+            }
+        }
+        // If the contact with the specified id does not exist, return null
         return null;
     }
 
@@ -78,6 +93,15 @@ public class Phonebook
     private void increasePhonebookMaxSize()
     {
         // Complete this method
+
+        // Create a new array with increased size
+        Person[] newContacts = new Person[contacts.length * 2];
+        // Copy existing contacts to the new array
+        for (int i = 0; i < size; i++) {
+            newContacts[i] = contacts[i];
+        }
+        // Update the contacts reference to point to the new array
+        contacts = newContacts;
     }
 
     /**
@@ -88,6 +112,21 @@ public class Phonebook
     public void insert(Person p)
     {
         // Complete this method
+
+        // Check if the phonebook is full and increase its size if necessary
+        if (size == contacts.length) {
+            increasePhonebookMaxSize();
+        }
+        // Find the appropriate index to insert the new person
+        int indexToInsert = findIndexInsertion(p);
+        // Shift elements to the right to make space for the new person
+        for (int i = size - 1; i >= indexToInsert; i--) {
+            contacts[i + 1] = contacts[i];
+        }
+        // Insert the new person at the appropriate index
+        contacts[indexToInsert] = p;
+        // Increment the size of the phonebook
+        size++;
     }
 
     /**
@@ -99,7 +138,12 @@ public class Phonebook
     private int findIndexInsertion(Person p)
     {
         // Complete this method
-        return 0;
+        
+        int indexToInsert = 0;
+        while (indexToInsert < size && contacts[indexToInsert].compareTo(p) < 0) {
+            indexToInsert++;
+        }
+        return indexToInsert;
     }
 
     /**
@@ -111,7 +155,28 @@ public class Phonebook
     public Person deleteContact(String id)
     {
         // Complete this method...
-        return null;
+
+        // Search for the contact with the specified ID
+        int indexToDelete = -1;
+        for (int i = 0; i < size; i++) {
+            if (contacts[i].getId().equals(id)) {
+                indexToDelete = i;
+                break;
+            }
+        }
+        // If contact with the specified ID is found
+        if (indexToDelete != -1) {
+            Person deletedContact = contacts[indexToDelete];
+            // Shift elements to the left to remove the deleted contact
+            adjustPhonebook(indexToDelete, size, "f");
+            // Set the last element to null and decrement the size
+            contacts[size - 1] = null;
+            size--;
+            return deletedContact;
+        } else {
+            // If contact with the specified ID is not found
+            return null;
+        }
     }
 
     /**
@@ -127,6 +192,19 @@ public class Phonebook
     private void adjustPhonebook(int start, int end, String direction)
     {
         // Complete this method...
+
+        // Check the direction of adjustment
+    if (direction.equals("f")) {
+        // Forward direction: element at index i takes the value of the element next to it
+        for (int i = start; i < end; i++) {
+            contacts[i] = contacts[i + 1];
+        }
+    } else if (direction.equals("b")) {
+        // Backward direction: element at index i takes the value of the element behind it
+        for (int i = end; i > start; i--) {
+            contacts[i] = contacts[i - 1];
+        }
+    }
     }
 
     /**
@@ -155,6 +233,12 @@ public class Phonebook
     public String toString()
     {
         // Complete this method.
-        return "";
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Phonebook Contacts:\n");
+        for (int i = 0; i < size; i++) {
+            sb.append(contacts[i]).append("\n");
+        }
+        return sb.toString();
     }
 }
