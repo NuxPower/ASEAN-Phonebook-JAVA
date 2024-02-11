@@ -5,10 +5,10 @@ public class Main
 
     private static final String[][] MENUS = { {
             // Main Menu
-            "Add New Contact", "Edit Contact", "Delete Contact", "View Phonebook", "Exit" },
+            "Store to ASEAN phonebook", "Edit entry in ASEAN phonebook", "Delete entry from ASEAN phonebook", "View/search ASEAN phonebook", "Exit" },
             {
                     // Edit Contact Menu
-                    "Student Number", "First Name", "Last Name", "Occupation", "Country Code",
+                    "Student Number", "Surname", "Gender", "Occupation", "Country Code",
                     "Area Code", "Phone Number", "None - Go back to Main Menu" },
             {
                     // Menu for View Phonebook
@@ -30,6 +30,15 @@ public class Main
             {
                 case 1:
                     pb.insert(createNewPerson());
+                    while (true) {
+                        String again = prompt("Do you want to enter another entry [Y/N]?");
+                        if (again.equals("Y") || again.equals("y")) {
+                            pb.insert(createNewPerson());
+                            continue;
+                        } else if (again.equals("N") || again.equals("n")) {
+                            break;
+                        }
+                    }
                     break;
                 case 2:
                     String contactID = prompt("\nEnter contact Id: ");
@@ -50,14 +59,14 @@ public class Main
                                 pb.insert(contact);
                                 continue;
                             case 2:
-                                String newFirstName = prompt("Enter new first name: ");
-                                contact.setFName(newFirstName);
+                                String newSurname = prompt("Enter new surname: ");
+                                contact.setLName(newSurname);
                                 pb.deleteContact(contactID);
                                 pb.insert(contact);
                                 continue;
                             case 3:
-                                String newLastName = prompt("Enter new last name: ");
-                                contact.setLName(newLastName);
+                                String newGender = prompt("Enter new gender: ");
+                                contact.setSex(newGender);
                                 pb.deleteContact(contactID);
                                 pb.insert(contact);
                                 continue;
@@ -142,7 +151,7 @@ public class Main
                             int[] countryCodes = new int[9];
                             while (true)
                             {
-                                int countryCode = Integer.parseInt("Enter Country Code: ");
+                                int countryCode = Integer.parseInt(prompt("Enter Country Code: "));
                                 // Print if input is 0
                                 if (countryCode == 0)
                                 {
@@ -292,7 +301,7 @@ public class Main
         fname = prompt("Enter First Name: ");
         lname = prompt("Enter Last Name: ");
         occupation = prompt("Enter Occupation: ");
-        sex = prompt("Enter sex/gender: ");
+        sex = prompt("Enter sex/gender (M for male, F for female): ");
         countryCode = Integer.parseInt(prompt("Enter Country Code: "));
         areaCode = Integer.parseInt(prompt("Enter Area Code: "));
         contactNum = prompt("Enter Contact Number: ");
