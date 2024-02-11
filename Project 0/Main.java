@@ -165,7 +165,53 @@ public class Main
     private int convertChoices(int choice)
     {
         // Complete this method.
-        return 0;
+
+        int countryCode = 0;
+        switch (choice) {
+            case 1:
+                countryCode = 95;
+                break;
+            case 2:
+                countryCode = 855;
+                break;
+            case 3:
+                countryCode = 66;
+                break;
+            case 4:
+                countryCode = 84;
+                break;
+            case 5:
+                countryCode = 60;
+                break;
+            case 6:
+                countryCode = 63;
+                break;
+            case 7:
+                countryCode = 62;
+                break;
+            case 8:
+                countryCode = 670;
+                break;
+            case 9:
+                countryCode = 856;
+                break;
+            case 10:
+                countryCode = 673;
+                break;
+            case 11:
+                countryCode = 65;
+                break;
+            case 12:
+                countryCode = -1; // Use a special value to indicate ALL
+                break;
+            case 0:
+                System.out.println("Exiting...");
+                System.exit(0);
+            default:
+                System.out.println("Invalid choice");
+                System.exit(0);
+        }
+        return countryCode;
     }
 
     /**
