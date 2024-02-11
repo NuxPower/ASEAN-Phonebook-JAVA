@@ -32,6 +32,71 @@ public class Main
                     pb.insert(createNewPerson());
                     break;
                 case 2:
+                    String contactID = prompt("\nEnter contact Id: ");
+                    Person contact = pb.getContact(contactID);
+
+                    while(true) {
+                        if (contact != null) {
+                            System.out.println(contact.toString());
+
+                        showMenu(2, 4);
+                        int editOpt = Integer.parseInt(prompt("Enter option: "));
+
+                        switch (editOpt) {
+                            case 1:
+                                String newID = prompt("Enter new ID: ");
+                                contact.setId(newID);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 2:
+                                String newFirstName = prompt("Enter new first name: ");
+                                contact.setFName(newFirstName);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 3:
+                                String newLastName = prompt("Enter new last name: ");
+                                contact.setLName(newLastName);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 4:
+                                String newOccupation = prompt("Enter new occupation: ");
+                                contact.setOccupation(newOccupation);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 5:
+                                int newCountryCode = Integer.parseInt(prompt("Enter new country code: "));
+                                contact.setCountryCode(newCountryCode);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 6:
+                                int newAreaCode = Integer.parseInt(prompt("Enter new area code: "));
+                                contact.setAreaCode(newAreaCode);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 7:
+                                String newPhoneNumber = prompt("Enter new phone number: ");
+                                contact.setContactNum(newPhoneNumber);
+                                pb.deleteContact(contactID);
+                                pb.insert(contact);
+                                continue;
+                            case 8:
+                                break;
+                            default:
+                                System.out.println("Invalid option!");
+                                continue;
+                            }
+                            break;
+                        } else {
+                            System.out.println("No contact found with inputted id!");
+                            break;
+                        }
+                    }
                     break;
                 case 3:
                     String id = prompt("Enter contact ID to delete: ");
