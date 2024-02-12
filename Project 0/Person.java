@@ -117,7 +117,7 @@ public class Person implements Comparable<Person>
      */
     public String getPhoneNumber()
     {
-        return this.countryCode + "-" + this.areaCode + "-" + this.getContactNum();
+        return "country: " + this.countryCode + ", area: " + this.areaCode + ", number: " + this.getContactNum();
     }
 
     /**
@@ -157,7 +157,7 @@ public class Person implements Comparable<Person>
      */
     public String toString()
     {
-        return String.format("%s is a %s. %s number is %s", this.getFullName(),
+        return String.format("%s is a %s. %s info is %s", this.getFullName(),
                 this.getOccupation(), this.getPronoun(), this.getPhoneNumber());
     }
 }
