@@ -19,8 +19,14 @@ public class Phonebook
     public int getSize()
     {
         // Complete this method
+         int size = 0;
+        for (Person contact : contacts) {
+            if (contact != null) {
+                size++;
+            }
+        }
         return size;
-    }
+        }
 
     /**
      * Get the contact at index.
@@ -126,7 +132,7 @@ public class Phonebook
         // Insert the new person at the appropriate index
         contacts[indexToInsert] = p;
         // Increment the size of the phonebook
-        incrSize();
+        size++;
     }
 
     /**
