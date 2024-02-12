@@ -126,7 +126,7 @@ public class Phonebook
         // Insert the new person at the appropriate index
         contacts[indexToInsert] = p;
         // Increment the size of the phonebook
-        size++;
+        incrSize();
     }
 
     /**
