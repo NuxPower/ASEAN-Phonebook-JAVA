@@ -25,7 +25,12 @@ public class Main
             showMenu(1, 1);
             // System.out.print("Select an option: ");
             // int opt = input.nextInt();
-            int opt = Integer.parseInt(prompt("Select an option: "));
+            int opt;
+            try {
+                opt = Integer.parseInt(prompt("Select an option: "));
+            } catch (Exception e) {
+                opt = 0;
+            }
             switch (opt)
             {
                 case 1:
@@ -116,18 +121,17 @@ public class Main
                     {
                         showMenu(3, 1);
                         int showOpt = Integer.parseInt(prompt("Enter option:"));
+                        // if (showOpt == 1)
+                        // {
+                        //     System.out.println(pb);
+                        // }
                         if (showOpt == 1)
-                        {
-                            System.out.println(pb);
-                        }
-                        
-                        else if (showOpt == 2)
                         {
                             int ccCount = 0;
                             int[] countryCodes = new int[9];
                             while (true)
                             {
-                                int countryCode = Integer.parseInt(prompt("Enter Country Code: "));
+                                int countryCode = Integer.parseInt(prompt("From which country: "));
                                 // Print if input is 0
                                 if (countryCode == 0)
                                 {
@@ -155,7 +159,7 @@ public class Main
 
                             }
                         }
-                        else if (showOpt == 3)
+                        else if (showOpt == 2)
                         {
                             String targetId = prompt("Enter id to search: ");
                             Person target = pb.getContact(targetId);
@@ -168,7 +172,8 @@ public class Main
                                 System.out.println("No contact exists with that surname!");
                             }
                         }
-                        else if (showOpt == 4)
+
+                        else if (showOpt == 3)
                         {
                             break;
                         }
