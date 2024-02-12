@@ -136,21 +136,19 @@ public class Main
                                 System.out.println("[1] Burma       [2] Cambodia        3] Thailand     [4] Vietnam     [5]Malaysia\n" + 
                                 "[6] Philippines    [7] Indonesia   [8] Timor Leste     [9] Laos        [10] Brunei\n" +
                                 "[11] Singapore     [12] All        [0] No more");
-                                if (countryCode == 0)
+                                if (countryCodes.length == 0)
                                 {
                                     pb.printContactsFromCountryCodes(countryCodes);
                                     break;
                                 }
                                 // Check if area code is already inputted
                                 boolean exists = false;
-                                for (int a : countryCodes)
-                                {
-                                    if (a == countryCode)
-                                    {
-                                        System.out.println(
-                                                "This area code has already been inputted!");
-                                        exists = true;
-                                        break;
+                                for (int a : countryCodes) {
+                                    for (int code : countryCodes) {
+                                        if (a == code) {
+                                            System.out.println("This area code has already been inputted!");
+                                            exists = true;
+                                            break;
                                     }
                                 }
                                 // Only add if area codes isn't part of the array...
