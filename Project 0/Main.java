@@ -12,7 +12,7 @@ public class Main
                     "Area Code", "Phone Number", "None - Go back to Main Menu" },
             {
                     // Menu for View Phonebook
-                    "View All", "Search by country", "Search by surname",
+                    "Search by country", "Search by ID",
                     "Go back to Main Menu" }, };
     private static final Scanner input = new Scanner(System.in);
 
@@ -120,20 +120,8 @@ public class Main
                         {
                             System.out.println(pb);
                         }
+                        
                         else if (showOpt == 2)
-                        {
-                            String targetId = prompt("Enter id to search: ");
-                            Person target = pb.getContact(targetId);
-                            if (target != null)
-                            {
-                                System.out.println(target);
-                            }
-                            else
-                            {
-                                System.out.println("No contact exists with that surname!");
-                            }
-                        }
-                        else if (showOpt == 3)
                         {
                             int ccCount = 0;
                             int[] countryCodes = new int[9];
@@ -165,6 +153,19 @@ public class Main
                                     ccCount++;
                                 }
 
+                            }
+                        }
+                        else if (showOpt == 3)
+                        {
+                            String targetId = prompt("Enter id to search: ");
+                            Person target = pb.getContact(targetId);
+                            if (target != null)
+                            {
+                                System.out.println(target);
+                            }
+                            else
+                            {
+                                System.out.println("No contact exists with that surname!");
                             }
                         }
                         else if (showOpt == 4)
