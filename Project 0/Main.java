@@ -131,8 +131,11 @@ public class Main
                             int[] countryCodes = new int[9];
                             while (true)
                             {
-                                int countryCode = Integer.parseInt(prompt("From which country: "));
+                                System.out.println("From which country: ");
                                 // Print if input is 0
+                                System.out.println("[1] Burma       [2] Cambodia        3] Thailand     [4] Vietnam     [5]Malaysia\n" + 
+                                "[6] Philippines    [7] Indonesia   [8] Timor Leste     [9] Laos        [10] Brunei\n" +
+                                "[11] Singapore     [12] All        [0] No more");
                                 if (countryCode == 0)
                                 {
                                     pb.printContactsFromCountryCodes(countryCodes);
