@@ -59,7 +59,7 @@ public class Person implements Comparable<Person>
      */
     public String getPronoun()
     {
-        return this.getSex().equalsIgnoreCase("M") ? "His" : "Her";
+        return this.getSex().equals("M") ? "His" : "Her";
     }
 
     public String getOccupation()
@@ -117,7 +117,7 @@ public class Person implements Comparable<Person>
      */
     public String getPhoneNumber()
     {
-        return "country: " + this.countryCode + ", area: " + this.areaCode + ", number: " + this.getContactNum();
+        return this.countryCode + "-" + this.areaCode + "-" + this.getContactNum();
     }
 
     /**
@@ -144,12 +144,23 @@ public class Person implements Comparable<Person>
 
         // Compare last names
         int lastNameComparison = this.lname.compareTo(o.lname);
-        // If last names are different, return the result of comparing last names
         if (lastNameComparison != 0) {
             return lastNameComparison;
+        } else {
+            // Last names are the same
+            // Compare first names
+            int firstNameComparison = this.fname.compareTo(o.fname);
+            if (firstNameComparison != 0) {
+                if (firstNameComparison > 0) {
+                    return 1;
+                } else if (firstNameComparison < 0) {
+                    return -1;
+                }
+            } else if (firstNameComparison == 0) {
+                return 0;
+            }
         }
-        // If last names are the same, compare first names
-        return this.fname.compareTo(o.fname);
+        return lastNameComparison;
     }
 
     /**
@@ -157,7 +168,7 @@ public class Person implements Comparable<Person>
      */
     public String toString()
     {
-        return String.format("%s is a %s. %s info is %s", this.getFullName(),
+        return String.format("%s is a %s. %s number is %s", this.getFullName(),
                 this.getOccupation(), this.getPronoun(), this.getPhoneNumber());
     }
 }
