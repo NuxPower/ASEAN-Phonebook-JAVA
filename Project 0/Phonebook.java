@@ -39,7 +39,7 @@ public class Phonebook
         // Complete this method
 
         // checks if index is valid and returns contacts
-        if (index >= 0 && index < size) {
+        if (index >= 0 && index < getSize()) {
             return contacts[index];
         } else {
             // Invalid or out of range
@@ -225,32 +225,96 @@ public class Phonebook
      * @param countryCodes Area codes to be used as a filter.
      * @return Contacts on this phonebook under a particular area code set by the user.
      */
-    public String printContactsFromCountryCodes(int... countryCodes)
-    {
+    public String printContactsFromCountryCodes(int... countryCodes) {
         // Complete this method.
+    
+        String result = "Contacts from the ";
         
-    String result = "Contacts from country codes: ";
-    if (countryCodes.length > 0) {
-        for (int i = 0; i < countryCodes.length - 1; i++) {
-            result += countryCodes[i] + ", ";
+        if (countryCodes.length > 0) {
+            for (int i = 0; i < countryCodes.length; i++) {
+                switch (countryCodes[i]) {
+                    case 95:
+                        result += "Burma";
+                        break;
+                    case 855:
+                        result += "Cambodia";
+                        break;
+                    case 66:
+                        result += "Thailand";
+                        break;
+                    case 84:
+                        result += "Vietnam";
+                        break;
+                    case 60:
+                        result += "Malaysia";
+                        break;
+                    case 63:
+                        result += "Philippines";
+                        break;
+                    case 62:
+                        result += "Indonesia";
+                        break;
+                    case 670:
+                        result += "Timor Leste";
+                        break;
+                    case 856:
+                        result += "Laos";
+                        break;
+                    case 673:
+                        result += "Brunei";
+                        break;
+                    case 65:
+                        result += "Singapore";
+                        break;
+                    default:
+                        result += "Invalid country code";
+                        break;
+                }
+                if (i < countryCodes.length - 1) {
+                    result += ", ";
+                } else if (i == countryCodes.length - 1 && countryCodes.length > 1) {
+                    result += ": ";
+                }
             }
-        result += countryCodes[countryCodes.length - 1]; // Append the last country code without comma
+        } else {
+            result += "\nNo country codes provided";
         }
-
-    // Iterate through contacts and filter based on country codes
-    for (Person contact : contacts) {
-        if (contact != null) {
-            for (int countryCode : countryCodes) {
-                if (contact.getCountryCode() == countryCode) {
-                    result += "\n" + contact.toString();
-                    break;
+    
+        // Iterate through contacts and filter based on country codes
+        if (contacts.length > 0) {
+            int contactCount = 0;
+            for (Person contact : contacts) {
+                if (contact != null) {
+                    for (int countryCode : countryCodes) {
+                        if (contact.getCountryCode() == countryCode) {
+                            result += "\n" + contact.toString();
+                            contactCount++;
+                            break;
+                        }
                     }
+                }
+            }
+            if (contactCount == 0) {
+                result += "\nNo contacts found for provided country codes.";
+            }
+        } else {
+            result += "\nNo contacts available.";
+        }
+    
+        // Check if there are only two countries
+        if (countryCodes.length == 2) {
+            result = result.replace(", ", " and ");
+        } else if (countryCodes.length > 2) {
+            result = result.replace(", ", ", ");
+            int lastCommaIndex = result.lastIndexOf(",");
+            if (lastCommaIndex != -1) {
+                result = result.substring(0, lastCommaIndex) + ", and" + result.substring(lastCommaIndex + 1);
             }
         }
+        return result;
     }
-    return result;
-    }
-
+    
+    
     /**
      * Print the entire phonebook without any filter or so...
      * 
@@ -260,10 +324,11 @@ public class Phonebook
     {
         // Complete this method.
 
-        String result = "Phonebook Contacts:\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Phonebook Contacts:\n");
         for (int i = 0; i < size; i++) {
-            result += contacts[i] + "\n";
+            sb.append(contacts[i]).append("\n");
         }
-        return result;
+        return sb.toString();
     }
 }
