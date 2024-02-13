@@ -23,9 +23,6 @@ public class Main
         while (true)
         {
             showMenu(1, 1);
-            // System.out.print("Select an option: ");
-            // int opt = input.nextInt();
-            // int opt = Integer.parseInt(prompt("Select an option: "));
             int opt;
             try {
                 opt = Integer.parseInt(prompt("Select an option: "));
@@ -38,10 +35,10 @@ public class Main
                     pb.insert(createNewPerson());
                     while (true) {
                         String again = prompt("Do you want to enter another entry [Y/N]?");
-                        if (again.equals("Y") || again.equals("y")) {
+                        if (again.equalsIgnoreCase("Y")) {
                             pb.insert(createNewPerson());
                             continue;
-                        } else if (again.equals("N") || again.equals("n")) {
+                        } else if (again.equalsIgnoreCase("N")) {
                             break;
                         }
                     }
@@ -136,41 +133,76 @@ public class Main
                         {
                             int ccCount = 0;
                             int[] countryCodes = new int[9];
-                            while (true)
-                            {
+                            Main instance = new Main();
+                            int countryCode;
+                            while (true) {
                                 System.out.println("From which country: ");
-                                // Print if input is 0
-                                System.out.println("[1] Burma       [2] Cambodia        3] Thailand     [4] Vietnam     [5]Malaysia\n" + 
+                                System.out.println("[1] Burma          [2] Cambodia    [3] Thailand        [4] Vietnam     [5]Malaysia\n" + 
                                 "[6] Philippines    [7] Indonesia   [8] Timor Leste     [9] Laos        [10] Brunei\n" +
                                 "[11] Singapore     [12] All        [0] No more");
                                 int currentIndex = 0;
-                                int countryCode;
                                 while (true) {
-                                    countryCode = Integer.parseInt(prompt("Enter choice: "));
-                                    
-                                    if (countryCode > 12 || countryCode < 0) {
+                                    try {
+                                        countryCode = Integer.parseInt(prompt("Enter choice: "));
+                                    } catch (NumberFormatException e) {
                                         System.out.println("Invalid choice!");
                                         continue;
+                                    }
+                                    int result = instance.convertChoices(countryCode);
+                                    if (result > 12 || countryCode < 0) {
+                                        System.out.println("Invalid choice!");
                                     } else if (countryCode == 0) {
                                         break;
                                     } else if (countryCode == 12) {
                                         pb.printContactsFromCountryCodes(countryCodes);
+                                        continue;
                                     } else if (countryCode < 12 && countryCode > 0) {
-                                        if (countryCodes[currentIndex] == countryCode) {
-                                            System.out.println("This area code has already been inputted!");
-                                            continue;
-                                        } else if (countryCodes[currentIndex] != countryCode) {
-                                            
-                                        }
+                                        boolean codeAlreadyInputted = false;
+                                        for (int code : countryCodes) {
+                                            if (code == countryCode) {
+                                                System.out.println("This area code has already been inputted!");
+                                            } 
+                                        } 
+                                    } else {
+                                        continue;
                                     }
-                                    if (countryCode == 0)
-                                    {
-                                        pb.printContactsFromCountryCodes(countryCodes);
-                                        break;
-                                    }    
-                                    countryCodes[currentIndex] = countryCode;
-                                    currentIndex++;
+                                    if (currentIndex < countryCodes.length) {
+                                        countryCodes[currentIndex] = countryCode;
+                                        currentIndex++;
+                                    } 
+                                    break;
                                 }
+
+                                //     if (result > 12 || countryCode < 0) {
+                                //         System.out.println("Invalid choice!");
+                                //         continue;
+                                //     } else if (countryCode == 0) {
+                                //         break;
+                                //     } else if (countryCode == 12) {
+                                //         pb.printContactsFromCountryCodes(countryCodes);
+                                //         currentIndex = 0;
+                                //         continue;
+                                //     } else if (countryCode < 12 && countryCode > 0) {
+                                //         boolean codeAlreadyInputted = false;
+                                //         for (int code : countryCodes) {
+                                //             if (code == countryCode) {
+                                //                 System.out.println("This area code has already been inputted!");
+                                //                 codeAlreadyInputted = true;
+                                //                 break;
+                                //             }
+                                //         }   
+                                //         if (!codeAlreadyInputted) {
+                                //             continue;
+                                //         }
+                                //         if (currentIndex < countryCodes.length) {
+                                //             countryCodes[currentIndex] = countryCode;
+                                //             currentIndex++;
+                                //         } 
+                                //     } else {
+                                //         System.out.println("Country code limit reached!");
+                                //         break;
+                                //     }
+                                // }
                                 // Check if area code is already inputted
                                 boolean exists = false;
                                 for (int a : countryCodes)
@@ -189,7 +221,7 @@ public class Main
                                     countryCodes[ccCount] = countryCode;
                                     ccCount++;
                                 }
-
+                                break;
                             }
                         }
                         else if (showOpt == 2)
