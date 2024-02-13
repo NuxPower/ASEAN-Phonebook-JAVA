@@ -25,6 +25,7 @@ public class Main
             showMenu(1, 1);
             // System.out.print("Select an option: ");
             // int opt = input.nextInt();
+            // int opt = Integer.parseInt(prompt("Select an option: "));
             int opt;
             try {
                 opt = Integer.parseInt(prompt("Select an option: "));
@@ -105,17 +106,11 @@ public class Main
                     Person p = pb.getContact(id);
                     if (p != null)
                     {
-                        String suresure = prompt("Are you sure you want to delete it [Y/N]?");
-                        if (suresure.equals("Y") || suresure.equals("y")) {
-                            Person deletedContact = pb.deleteContact(id);
-                            if (deletedContact != null) {
-                                System.out.println("Deletion successful");
-                            } continue;
-                        } 
-                        else if(suresure.equals("N") || suresure.equals("n")) {
-                            System.out.println("Deletion did not proceed");
-                            break;
-                        } 
+                        Person deletedContact = pb.deleteContact(id);
+                        if (deletedContact != null)
+                        {
+                            System.out.println("Contact has been successfully deleted!");
+                        }
                     }
                     else
                     {
@@ -142,19 +137,44 @@ public class Main
                                 System.out.println("[1] Burma       [2] Cambodia        3] Thailand     [4] Vietnam     [5]Malaysia\n" + 
                                 "[6] Philippines    [7] Indonesia   [8] Timor Leste     [9] Laos        [10] Brunei\n" +
                                 "[11] Singapore     [12] All        [0] No more");
-                                if (countryCodes.length == 0)
-                                {
-                                    pb.printContactsFromCountryCodes(countryCodes);
-                                    break;
+                                int currentIndex = 0;
+                                int countryCode;
+                                while (true) {
+                                    countryCode = Integer.parseInt(prompt("Enter choice: "));
+                                    
+                                    if (countryCode > 12 || countryCode < 0) {
+                                        System.out.println("Invalid choice!");
+                                        continue;
+                                    } else if (countryCode == 0) {
+                                        break;
+                                    } else if (countryCode == 12) {
+                                        pb.printContactsFromCountryCodes(countryCodes);
+                                    } else if (countryCode < 12 && countryCode > 0) {
+                                        if (countryCodes[currentIndex] == countryCode) {
+                                            System.out.println("This area code has already been inputted!");
+                                            continue;
+                                        } else if (countryCodes[currentIndex] != countryCode) {
+                                            
+                                        }
+                                    }
+                                    if (countryCode == 0)
+                                    {
+                                        pb.printContactsFromCountryCodes(countryCodes);
+                                        break;
+                                    }    
+                                    countryCodes[currentIndex] = countryCode;
+                                    currentIndex++;
                                 }
                                 // Check if area code is already inputted
                                 boolean exists = false;
-                                for (int a : countryCodes) {
-                                    for (int code : countryCodes) {
-                                        if (a == code) {
-                                            System.out.println("This area code has already been inputted!");
-                                            exists = true;
-                                            break;
+                                for (int a : countryCodes)
+                                {
+                                    if (a == countryCode)
+                                    {
+                                        System.out.println(
+                                                "This area code has already been inputted!");
+                                        exists = true;
+                                        break;
                                     }
                                 }
                                 // Only add if area codes isn't part of the array...
