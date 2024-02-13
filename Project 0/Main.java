@@ -106,11 +106,17 @@ public class Main
                     Person p = pb.getContact(id);
                     if (p != null)
                     {
-                        Person deletedContact = pb.deleteContact(id);
-                        if (deletedContact != null)
-                        {
-                            System.out.println("Contact has been successfully deleted!");
-                        }
+                        String suresure = prompt("Are you sure you want to delete it [Y/N]?");
+                        if (suresure.equals("Y") || suresure.equals("y")) {
+                            Person deletedContact = pb.deleteContact(id);
+                            if (deletedContact != null) {
+                                System.out.println("Deletion successful");
+                            } continue;
+                        } 
+                        else if(suresure.equals("N") || suresure.equals("n")) {
+                            System.out.println("Deletion did not proceed");
+                            break;
+                        } 
                     }
                     else
                     {
