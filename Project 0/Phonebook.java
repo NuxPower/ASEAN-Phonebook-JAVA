@@ -228,27 +228,27 @@ public class Phonebook
     public String printContactsFromCountryCodes(int... countryCodes)
     {
         // Complete this method.
-
-        StringBuilder result = new StringBuilder();
-        result.append("Contacts from country codes: ");
-        for (int code : countryCodes) {
-            result.append(code).append(", ");
+        
+    String result = "Contacts from country codes: ";
+    if (countryCodes.length > 0) {
+        for (int i = 0; i < countryCodes.length - 1; i++) {
+            result += countryCodes[i] + ", ";
+            }
+        result += countryCodes[countryCodes.length - 1]; // Append the last country code without comma
         }
-        result.delete(result.length() - 2, result.length()); // Remove the trailing comma and space
-        result.append("\n");
 
-        // Iterate through contacts and filter based on country codes
-        for (Person contact : contacts) {
-            if (contact != null) {
-                for (int countryCode : countryCodes) {
-                    if (contact.getCountryCode() == countryCode) {
-                        result.append(contact.toString()).append("\n");
-                        break;
-                }
+    // Iterate through contacts and filter based on country codes
+    for (Person contact : contacts) {
+        if (contact != null) {
+            for (int countryCode : countryCodes) {
+                if (contact.getCountryCode() == countryCode) {
+                    result += "\n" + contact.toString();
+                    break;
+                    }
             }
         }
     }
-    return result.toString();
+    return result;
     }
 
     /**
@@ -260,11 +260,10 @@ public class Phonebook
     {
         // Complete this method.
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Phonebook Contacts:\n");
+        String result = "Phonebook Contacts:\n";
         for (int i = 0; i < size; i++) {
-            sb.append(contacts[i]).append("\n");
+            result += contacts[i] + "\n";
         }
-        return sb.toString();
+        return result;
     }
 }
