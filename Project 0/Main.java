@@ -18,7 +18,7 @@ public class Main
                     //Menu for Country
                     "Burma", "Cambodia", "Thailand", "Vietnam", "Malaysia", "Philippines",
                     "Indonesia", "Timor Leste", "Laos", "Brunei", "Singapore", 
-                    "All"}};
+                    "All", "No more"}};
     private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args)
@@ -57,48 +57,48 @@ public class Main
 
                     while(true) {
                         if (contact != null) {
-                            System.out.println("Here is the existing information about " + contact.getFName() + "\n" + contact.toString());
+                            System.out.println("Here is the existing information about " + contactID + ":\n" + contact.toString());
+                            System.out.println("\nWhich of the information do you wish to change?");
+                            showMenu(2, 4);
+                            int editOpt = Integer.parseInt(prompt("Enter choice: "));
 
-                        showMenu(2, 4);
-                        int editOpt = Integer.parseInt(prompt("Enter choice: "));
-
-                        switch (editOpt) {
-                            case 1:
-                                String newID = prompt("Enter new ID: ");
-                                contact.setId(newID);
-                                continue;
-                            case 2:
-                                String newSurname = prompt("Enter new surname: ");
-                                contact.setLName(newSurname);
-                                continue;
-                            case 3:
-                                String newGender = prompt("Enter new gender (M for male, F for female): ");
-                                contact.setSex(newGender);
-                                continue;
-                            case 4:
-                                String newOccupation = prompt("Enter new occupation: ");
-                                contact.setOccupation(newOccupation);
-                                continue;
-                            case 5:
-                                int newCountryCode = Integer.parseInt(prompt("Enter new country code: "));
-                                contact.setCountryCode(newCountryCode);
-                                continue;
-                            case 6:
-                                int newAreaCode = Integer.parseInt(prompt("Enter new area code: "));
-                                contact.setAreaCode(newAreaCode);
-                                continue;
-                            case 7:
-                                String newPhoneNumber = prompt("Enter new phone number: ");
-                                contact.setContactNum(newPhoneNumber);
-                                continue;
-                            case 8:
-                                pb.insert(contact);
+                            switch (editOpt) {
+                                case 1:
+                                    String newID = prompt("Enter new ID: ");
+                                    contact.setId(newID);
+                                    continue;
+                                case 2:
+                                    String newSurname = prompt("Enter new surname: ");
+                                    contact.setLName(newSurname);
+                                    continue;
+                                case 3:
+                                    String newGender = prompt("Enter new gender (M for male, F for female): ");
+                                    contact.setSex(newGender);
+                                    continue;
+                                case 4:
+                                    String newOccupation = prompt("Enter new occupation: ");
+                                    contact.setOccupation(newOccupation);
+                                    continue;
+                                case 5:
+                                    int newCountryCode = Integer.parseInt(prompt("Enter new country code: "));
+                                    contact.setCountryCode(newCountryCode);
+                                    continue;
+                                case 6:
+                                    int newAreaCode = Integer.parseInt(prompt("Enter new area code: "));
+                                    contact.setAreaCode(newAreaCode);
+                                    continue;
+                                case 7:
+                                    String newPhoneNumber = prompt("Enter new phone number: ");
+                                    contact.setContactNum(newPhoneNumber);
+                                    continue;
+                                case 8:
+                                    pb.insert(contact);
+                                    break;
+                                default:
+                                    System.out.println("Invalid option!");
+                                    continue;
+                                }
                                 break;
-                            default:
-                                System.out.println("Invalid option!");
-                                continue;
-                            }
-                            break;
                         } else {
                             System.out.println("No contact found with inputted id!");
                             break;
@@ -106,18 +106,17 @@ public class Main
                     }
                     break;
                 case 3:
-                    String id = prompt("Enter contact ID to delete: ");
+                    String id = prompt("Enter student number: ");
                     Person p = pb.getContact(id);
                     if (p != null)
                     {
-                        String suresure = prompt("Are you sure you want to delete it [Y/N]?");
-                        if (suresure.equals("Y") || suresure.equals("y")) {
+                        String suresure = prompt("Are you sure you want to delete it [Y/N]? ");
+                        if (suresure.equalsIgnoreCase("Y")) {
                             Person deletedContact = pb.deleteContact(id);
                             if (deletedContact != null) {
                                 System.out.println("Deletion successful");
                             } continue;
-                        } 
-                        else if(suresure.equals("N") || suresure.equals("n")) {
+                        } else if(suresure.equalsIgnoreCase("N")) {
                             System.out.println("Deletion did not proceed");
                             break;
                         } 
@@ -136,10 +135,9 @@ public class Main
                         if (showOpt == 1)
                         {   
                             showMenu(4,5);
-                            System.out.println("[0] No More");
 			                int[] array = new int[0];	
                             while(true) {
-                                int choices = Integer.parseInt(prompt("From which coutnry: "));
+                                int choices = Integer.parseInt(prompt("From which country: "));
                                 if (choices != 0 && choices != 12) {
                                     int[] newArray = new int[array.length + 1];
                                     for (int i = 0; i < array.length; i++) {
@@ -156,7 +154,7 @@ public class Main
                                     System.out.println(pb.printContactsFromCountryCodes(array));
                                     break;
                                 }
-                            	}
+                            }
                         }
                         else if (showOpt == 2)
                         {
