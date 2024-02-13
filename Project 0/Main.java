@@ -51,16 +51,16 @@ public class Main
                     }
                     break;
                 case 2:
-                    String contactID = prompt("\nEnter contact Id: ");
+                    String contactID = prompt("\nEnter contact ID: ");
                     Person contact = pb.getContact(contactID);
                     pb.deleteContact(contactID);
 
                     while(true) {
                         if (contact != null) {
-                            System.out.println(contact.toString());
+                            System.out.println("Here is the existing information about " + contact.getFName() + "\n" + contact.toString());
 
                         showMenu(2, 4);
-                        int editOpt = Integer.parseInt(prompt("Enter option: "));
+                        int editOpt = Integer.parseInt(prompt("Enter choice: "));
 
                         switch (editOpt) {
                             case 1:
