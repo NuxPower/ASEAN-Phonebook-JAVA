@@ -159,7 +159,7 @@ public class Main
                         if (showOpt == 1)
                         {   
                             showMenu(4,5);
-			                int[] array = new int[0];	
+			    int[] array = new int[0];	
                             while(true) {
                                 int choices = Integer.parseInt(prompt("\nFrom which country: "));
                                 if (choices != 0 && choices != 12) {
