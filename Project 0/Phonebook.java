@@ -324,11 +324,11 @@ public class Phonebook
     {
         // Complete this method.
 
-        String result = "Phonebook Contacts:\n";
+        String pbString = "Phonebook Contacts:\n";
         for (int i = 0; i < size; i++) {
-            result += contacts[i] + "\n";
+            pbString += contacts[i] + "\n";
             }
-        return result;
+        return pbString;
         }
     }
 }
