@@ -324,11 +324,11 @@ public class Phonebook
     {
         // Complete this method.
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Phonebook Contacts:\n");
+        String result = "Phonebook Contacts:\n";
         for (int i = 0; i < size; i++) {
-            sb.append(contacts[i]).append("\n");
+            result += contacts[i] + "\n";
+            }
+        return result;
         }
-        return sb.toString();
     }
 }
