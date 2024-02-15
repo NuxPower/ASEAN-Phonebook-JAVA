@@ -39,18 +39,29 @@ public class Main
             switch (opt)
             {
                 case 1:
-                    pb.insert(createNewPerson());
+                    try {
+                        pb.insert(createNewPerson());
+                    } catch (Exception exception) {
+                        System.out.println("Error: " + exception.getMessage());
+                        System.out.println("Please try again.");
+                        break;
+                    }
+                    
                     while (true) {
-                        String again = prompt("Do you want to enter another entry [Y/N]?");
-                        if (again.equals("Y") || again.equals("y")) {
+                        String again = prompt("Do you want to enter another entry [Y/N]? ");
+                        if (again.equalsIgnoreCase("Y")) {
                             pb.insert(createNewPerson());
                             continue;
-                        } else if (again.equals("N") || again.equals("n")) {
+                        } else if (again.equalsIgnoreCase("N")) {
                             break;
                         }
                     }
                     break;
                 case 2:
+                    if (pb.isEmpty()) {
+                        System.out.println("Your phonebook is still empty.");
+                        break;
+                    }
                     String contactID = prompt("\nEnter contact ID: ");
                     Person contact = pb.getContact(contactID);
                     pb.deleteContact(contactID);
@@ -60,8 +71,13 @@ public class Main
                             System.out.println("Here is the existing information about " + contactID + ":\n" + contact.toString());
                             System.out.println("\nWhich of the information do you wish to change?");
                             showMenu(2, 4);
-                            int editOpt = Integer.parseInt(prompt("Enter choice: "));
-
+                            int editOpt;
+                            try {
+                                editOpt = Integer.parseInt(prompt("Enter choice: "));
+                            } catch (Exception exception) {
+                                System.out.println("Error: " + exception.getMessage());
+                                editOpt = 0;
+                            } 
                             switch (editOpt) {
                                 case 1:
                                     String newID = prompt("Enter new ID: ");
@@ -106,6 +122,10 @@ public class Main
                     }
                     break;
                 case 3:
+                    if (pb.isEmpty()) {
+                        System.out.println("Your phonebook is still empty.");
+                        break;
+                    } 
                     String id = prompt("Enter student number: ");
                     Person p = pb.getContact(id);
                     if (p != null)
@@ -127,17 +147,21 @@ public class Main
                     }
                     break;
                 case 4:
+                    if (pb.isEmpty()) {
+                        System.out.println("Your phonebook is still empty.");
+                        break;
+                    }
                     while (true)
                     {
                         showMenu(3, 1);
-                        int showOpt = Integer.parseInt(prompt("Enter option:"));
+                        int showOpt = Integer.parseInt(prompt("Enter option: "));
 
                         if (showOpt == 1)
                         {   
                             showMenu(4,5);
 			                int[] array = new int[0];	
                             while(true) {
-                                int choices = Integer.parseInt(prompt("From which country: "));
+                                int choices = Integer.parseInt(prompt("\nFrom which country: "));
                                 if (choices != 0 && choices != 12) {
                                     int[] newArray = new int[array.length + 1];
                                     for (int i = 0; i < array.length; i++) {
