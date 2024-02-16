@@ -18,7 +18,7 @@ public class Main
                     //Menu for Country
                     "Burma", "Cambodia", "Thailand", "Vietnam", "Malaysia", "Philippines",
                     "Indonesia", "Timor Leste", "Laos", "Brunei", "Singapore", 
-                    "All", "No more"}};
+                    "All"}};
     private static final Scanner input = new Scanner(System.in);
 
     public static void main(String[] args)
@@ -28,8 +28,6 @@ public class Main
         while (true)
         {
             showMenu(1, 1);
-            // System.out.print("Select an option: ");
-            // int opt = input.nextInt();
             int opt;
             try {
                 opt = Integer.parseInt(prompt("Select an option: "));
@@ -159,9 +157,10 @@ public class Main
                         if (showOpt == 1)
                         {   
                             showMenu(4,5);
-			    int[] array = new int[0];	
+                            System.out.print("[0] No more\n");
+                            int[] array = new int[0];	
                             while(true) {
-                                int choices = Integer.parseInt(prompt("\nFrom which country: "));
+                                int choices = Integer.parseInt(prompt("From which country: "));
                                 if (choices != 0 && choices != 12) {
                                     int[] newArray = new int[array.length + 1];
                                     for (int i = 0; i < array.length; i++) {
