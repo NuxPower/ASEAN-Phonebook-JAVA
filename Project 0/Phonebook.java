@@ -228,10 +228,11 @@ public class Phonebook
     public String printContactsFromCountryCodes(int... countryCodes) {
         // Complete this method.
     
-        String result = "Contacts from the ";
+        String result = "Contacts from the country/countries ";
+        int size = countryCodes.length;
         
-        if (countryCodes.length > 0) {
-            for (int i = 0; i < countryCodes.length; i++) {
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
                 switch (countryCodes[i]) {
                     case 95:
                         result += "Burma";
@@ -270,9 +271,11 @@ public class Phonebook
                         result += "Invalid country code";
                         break;
                 }
-                if (i < countryCodes.length - 1) {
+                if (i < size - 1) {
                     result += ", ";
-                } else if (i == countryCodes.length - 1 && countryCodes.length > 1) {
+                } else if (i == size - 1 && size > 1) {
+                    result += ": ";
+                } else if (size == 1) {
                     result += ": ";
                 }
             }
