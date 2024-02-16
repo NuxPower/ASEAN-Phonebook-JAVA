@@ -175,8 +175,31 @@ public class Main
                                     System.out.println(pb.toString());
                                     break;
                                 } else if (choices == 0) {
-                                    System.out.println(pb.printContactsFromCountryCodes(array));
-                                    break;
+                                    int count = 0;
+                                    int size = 0;
+                                    int[] filter = new int[size];
+                                    for (int i = 0; i < array.length; i++) {
+                                        boolean isDuplicate = false;
+                                        for (int j = 0; j < count; j++) {
+                                            if (array[i] == filter[j]) {
+                                                isDuplicate = true;
+                                                break;
+                                            }
+                                        }
+                                        if (isDuplicate == false) {
+                                            int[] temp = new int[size + 1];
+                                            for (int k = 0; k < size; k++) {
+                                                temp[k] = filter[k];
+                                            }
+                                            temp[count] = array[i];
+                                            filter = temp;
+                                            size++;
+                                            count++;
+                                        }
+                                    }
+
+                                System.out.println(pb.printContactsFromCountryCodes(filter));
+                                break;
                                 }
                             }
                         }
